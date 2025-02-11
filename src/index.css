@@ -1,0 +1,66 @@
+@import url(https://db.onlinewebfonts.com/c/1a5c2d8bbd4e28d99a6efcbb9a5b378f?family=JejuMyeongjo);
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.6rem;
+  --destructive: hsl(0 84.2% 60.2%);
+}
+
+@theme inline {
+  --color-destructive: var(--destructive);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+.background {
+  background: radial-gradient(
+      52.52% 32.71% at 50% 97.66%,
+      rgba(36, 160, 181, 0.2) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    #02191d;
+}
+.background-ticket {
+  background: radial-gradient(
+    ellipse 160% 80% at top left,
+    #24a0b5 -380%,
+    #02191d 100%
+  );
+}
+
+.roboto {
+  font-family: "Roboto", serif;
+  font-weight: 400;
+}
+.road-rage {
+  font-family: "Road Rage", serif;
+}
+.jeju {
+  font-family: "JejuMyeongjo";
+}
+.alatsi {
+  font-family: "Alatsi", serif;
+}
+
+.line {
+  background: #0e464f;
+  height: 2px;
+  width: 100%;
+  position: relative;
+}
+.line::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  @media (width >= 48rem) {
+    width: 36%;
+  }
+  height: 2px;
+  background: #24a0b5;
+}
