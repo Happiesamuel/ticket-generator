@@ -11,7 +11,7 @@ export default function TicketHeader({ headerObj }: HeaderObj) {
         <h1 className="font-normal jeju text-2xl md:text-3xl text-[#ffffff]">
           {headerObj.title}
         </h1>
-        <p className="roboto font-normal text-base text-[#FAFAFA]/95">
+        <p className="roboto font-normal text-base text-[#FAFAFA]">
           Step {headerObj.step}/3
         </p>
       </div>

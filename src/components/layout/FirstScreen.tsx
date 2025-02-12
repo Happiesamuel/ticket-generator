@@ -52,19 +52,19 @@ export default function FirstScreen() {
       <TicketHeader headerObj={{ title: "Ticket Selection", step: 1 }} />
       <TicketCover>
         <div className="border-[#07373F] background-ticket backdrop-blur-lg border-x-2 border-b-2 p-6 rounded-3xl text-center flex flex-col items-center space-y-2">
-          <h1 className="road-rage font-normal text-5xl md:text-6xl text-[#FAFAFA]/95">
+          <h1 className="road-rage font-normal text-5xl md:text-6xl text-[#FAFAFA]">
             Techember Fest ”25
           </h1>
-          <p className="roboto font-normal text-sm md:text-base text-[#FAFAFA]/95 tracking-wide w-[70%] text-center">
+          <p className="roboto font-normal text-sm md:text-base text-[#FAFAFA] tracking-wide w-[70%] text-center">
             Join us for an unforgettable experience at [Event Name]! Secure your
             spot now.
           </p>
-          <p className="roboto hidden md:block font-normal text-base text-[#FAFAFA]/95 space-x-4 tracking-wide">
+          <p className="roboto hidden md:block font-normal text-base text-[#FAFAFA] space-x-4 tracking-wide">
             <span>📍 [Event Location]</span>
             <span>| |</span>
             <span>March 15, 2025 | 7:00 PM</span>
           </p>
-          <p className="roboto  md:hidden font-normal text-base text-[#FAFAFA]/95 flex flex-col gap-1 mt-6 tracking-wide">
+          <p className="roboto  md:hidden font-normal text-base text-[#FAFAFA] flex flex-col gap-1 mt-6 tracking-wide">
             <span>📍 [Event Location]</span>
             <span>March 15, 2025 | 7:00 PM</span>
           </p>
@@ -73,7 +73,7 @@ export default function FirstScreen() {
         <div className="w-full h-1 bg-[#07373F]" />
 
         <div className="space-y-2">
-          <p className="roboto text-[#FAFAFA]/95 font-normal text-base tracking-wide">
+          <p className="roboto text-[#FAFAFA] font-normal text-base tracking-wide">
             Select Ticket Type:
           </p>
 
@@ -101,7 +101,7 @@ export default function FirstScreen() {
         </div>
 
         <div className="space-y-2">
-          <p className="roboto text-[#FAFAFA]/95 font-normal text-base tracking-wide">
+          <p className="roboto text-[#FAFAFA] font-normal text-base tracking-wide">
             Number of Tickets
           </p>
 
@@ -109,14 +109,14 @@ export default function FirstScreen() {
             onValueChange={(e) => setNumTicket(+e)}
             defaultValue={numTicket.toString()}
           >
-            <SelectTrigger className="w-full cursor-pointer border border-[#07373F] text-[#FAFAFA]/95">
+            <SelectTrigger className="w-full cursor-pointer border border-[#07373F] text-[#FAFAFA]">
               <SelectValue placeholder="1" />
             </SelectTrigger>
-            <SelectContent className="bg-[#052228] text-[#FAFAFA]/95 border border-[#07373F] ">
+            <SelectContent className="bg-[#052228] text-[#FAFAFA] border border-[#07373F] ">
               <SelectGroup>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <SelectItem
-                    className="hover:bg-[#24A0B5] duration-300 translate-all hover:text-[text-[#FAFAFA]/95] cursor-pointer"
+                    className="hover:bg-[#24A0B5] duration-300 translate-all hover:text-[#FAFAFA] cursor-pointer"
                     value={`${i + 1}`}
                     key={i}
                   >
@@ -134,7 +134,7 @@ export default function FirstScreen() {
           </Button>
           <Button
             onClick={() => handleSubmit()}
-            className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]/95"
+            className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]"
           >
             Next
           </Button>

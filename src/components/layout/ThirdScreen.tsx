@@ -11,7 +11,7 @@ export default function ThirdScreen() {
         <h1 className="alatsi text-[#ffffff] font-normal text-3xl tracking-wide ">
           Your Ticket is Booked!
         </h1>
-        <p className="roboto font-normal text-base  tracking-wide text-[#FAFAFA]/95">
+        <p className="roboto font-normal text-base  tracking-wide text-[#FAFAFA]">
           You can download or Check your email for a copy
         </p>
       </div>
@@ -174,7 +174,7 @@ export default function ThirdScreen() {
         >
           Book Another Ticket
         </Button>
-        <Button className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]/95">
+        <Button className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]">
           Download Ticket
         </Button>
       </div>

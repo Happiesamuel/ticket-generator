@@ -101,14 +101,14 @@ export default function SecondScreen() {
       <TicketCover>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="rounded-3xl text-[#FAFAFA]/95 border border-[#07373F] bg-[#052228] space-y-8 p-6">
+            <div className="rounded-3xl text-[#FAFAFA] border border-[#07373F] bg-[#052228] space-y-8 p-6">
               <FormField
                 control={form.control}
                 name="profilePhoto"
                 render={() => (
                   <FormItem>
                     <div className="flex flex-col gap-4">
-                      <FormLabel className="roboto font-normal text-base text-[#FAFAFA]/95 tracking-wide ">
+                      <FormLabel className="roboto font-normal text-base text-[#FAFAFA] tracking-wide ">
                         Profile Photo
                       </FormLabel>
                       <div className="bg-[#02191d] h-[240px] flex flex-col items-center justify-center">
@@ -163,7 +163,7 @@ export default function SecondScreen() {
               name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2">
-                  <FormLabel className="roboto font-normal text-[#FAFAFA]/95 text-base tracking-wide">
+                  <FormLabel className="roboto font-normal text-[#FAFAFA] text-base tracking-wide">
                     Enter your name
                   </FormLabel>
                   <FormControl>
@@ -186,7 +186,7 @@ export default function SecondScreen() {
               name="email"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2">
-                  <FormLabel className="roboto font-normal text-[#FAFAFA]/95 text-base tracking-wide">
+                  <FormLabel className="roboto font-normal text-[#FAFAFA] text-base tracking-wide">
                     Enter your email *
                   </FormLabel>
                   <FormControl>
@@ -212,7 +212,7 @@ export default function SecondScreen() {
               name="about"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2">
-                  <FormLabel className="roboto font-normal  text-[#FAFAFA]/95 text-base tracking-wide">
+                  <FormLabel className="roboto font-normal  text-[#FAFAFA] text-base tracking-wide">
                     About the project
                   </FormLabel>
                   <FormControl>
@@ -245,7 +245,7 @@ export default function SecondScreen() {
               </Button>
               <Button
                 type="submit"
-                className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]/95"
+                className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]"
               >
                 Get My Free Ticket
               </Button>
