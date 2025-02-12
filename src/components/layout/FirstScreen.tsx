@@ -11,6 +11,7 @@ import {
 } from "../ui/select";
 import { Button } from "../ui/button";
 import { useTicket } from "../../context/TicketContext";
+import { Toast } from "../../lib/utils";
 export default function FirstScreen() {
   const { numTicket: ticNum, dispatch, ticketType } = useTicket();
   const [id, setId] = useState<number | null>(ticketType);
@@ -35,17 +36,24 @@ export default function FirstScreen() {
       id: 3,
     },
   ];
-  function handleSubmit(): void {
+  async function handleSubmit() {
     if (!id) {
-      alert("Select our ticket type!");
+      Toast({
+        title: "Select Ticket Type",
+        description: "Choose your ticket type and number of ticket",
+      });
       return;
     }
-    dispatch({
-      type: "selectTicket",
-      payload: { id: id, ticketNum: numTicket },
-    });
-    localStorage.setItem("status", "second");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch({ type: "showLoader", payload: { load: true } });
+    setTimeout(() => {
+      dispatch({ type: "showLoader", payload: { load: false } });
+      dispatch({
+        type: "selectTicket",
+        payload: { id: id, ticketNum: numTicket },
+      });
+      localStorage.setItem("status", "second");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 1500);
   }
   return (
     <>

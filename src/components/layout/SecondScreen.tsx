@@ -17,7 +17,8 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useTicket } from "../../context/TicketContext";
 import React, { useCallback, useEffect } from "react";
-import { base64ToFile, handleFileUpload } from "../../lib/constants";
+import useUpload from "../../hooks/useUpload";
+import { FadeLoader } from "react-spinners";
 
 const formSchema = z.object({
   name: z
@@ -27,27 +28,23 @@ const formSchema = z.object({
   about: z.string().min(2, {
     message: "Project details must contain at least 2 characters",
   }),
-  profilePhoto: z
-    .custom<File>((file) => file instanceof File, "Profile photo is required")
-    .refine((file) => file.size > 0, "Profile photo cannot be empty")
-    .refine(
-      (file) => ["image/png", "image/jpeg"].includes(file.type),
-      "Only PNG or JPG allowed"
-    )
-    .refine((file) => file.size <= 2 * 1024 * 1024, "File must be under 2MB"),
+  profilePhoto: z.string().url("Invalid image URL"),
 });
 
 export default function SecondScreen() {
   const { dispatch } = useTicket();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: localStorage.getItem("name") || "",
       email: localStorage.getItem("email") || "",
       about: localStorage.getItem("about") || "",
+      profilePhoto: localStorage.getItem("profilePhoto") || "",
     },
   });
+  const { avatarUrl, uploading, uploadToCloudinary, setAvatarUrl } = useUpload(
+    form.setValue
+  );
   const handleInputChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -56,7 +53,6 @@ export default function SecondScreen() {
     localStorage.setItem(e.target.name, e.target.value);
   };
   const handleReset = () => {
-    // localStorage.removeItem("formData");
     localStorage.removeItem("profilePhoto");
     localStorage.removeItem("about");
     localStorage.removeItem("name");
@@ -64,37 +60,50 @@ export default function SecondScreen() {
     form.reset();
   };
   function onSubmit(values: z.infer<typeof formSchema>) {
-    localStorage.setItem("formData", JSON.stringify(values));
-    handleReset();
-    dispatch({
-      type: "ready",
-    });
-    localStorage.setItem("status", "third");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch({ type: "showLoader", payload: { load: true } });
+    setTimeout(() => {
+      dispatch({ type: "showLoader", payload: { load: false } });
+      localStorage.setItem("formData", JSON.stringify(values));
+      handleReset();
+      dispatch({
+        type: "ready",
+      });
+      localStorage.setItem("status", "third");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 1500);
   }
   useEffect(() => {
     const savedPhoto = localStorage.getItem("profilePhoto");
     if (savedPhoto) {
-      const file = base64ToFile(savedPhoto, "profilePhoto.png");
-      form.setValue("profilePhoto", file);
+      form.setValue("profilePhoto", savedPhoto);
+      setAvatarUrl(savedPhoto);
     }
-  }, [form]);
+  }, [form, setAvatarUrl]);
 
   const selectedFile = form.watch("profilePhoto");
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length > 0) {
-        form.setValue("profilePhoto", acceptedFiles[0]);
-        handleFileUpload(acceptedFiles[0]);
+        uploadToCloudinary(acceptedFiles[0]);
       }
     },
-    [form]
+    [uploadToCloudinary]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
     accept: { "image/*": [] },
   });
+  function navigateBack() {
+    dispatch({ type: "showLoader", payload: { load: true } });
+
+    setTimeout(() => {
+      dispatch({ type: "showLoader", payload: { load: false } });
+      dispatch({ type: "backToFirst" });
+      localStorage.setItem("status", "first");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 1500);
+  }
   return (
     <>
       <TicketHeader headerObj={{ title: "Attendee Details", step: 2 }} />
@@ -126,13 +135,26 @@ export default function SecondScreen() {
                                   : "Drag & drop or click to upload"}
                               </p>
                             </div>
+                          ) : uploading ? (
+                            <div className="relative overflow-hidden cursor-pointer w-full md:w-[250px] h-full flex flex-col gap-4 justify-center items-center">
+                              <img
+                                src={avatarUrl}
+                                loading="lazy"
+                                alt="Preview"
+                                className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
+                              />
+                              <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
+                                <FadeLoader color="#197686" />
+                              </div>
+                            </div>
                           ) : (
                             <div
                               {...getRootProps()}
                               className="relative overflow-hidden cursor-pointer w-full md:w-[250px] h-full flex flex-col gap-4 justify-center items-center"
                             >
                               <img
-                                src={URL.createObjectURL(selectedFile)}
+                                src={avatarUrl}
+                                loading="lazy"
                                 alt="Preview"
                                 className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
                               />
@@ -235,9 +257,7 @@ export default function SecondScreen() {
               <Button
                 type="reset"
                 onClick={() => {
-                  dispatch({ type: "backToFirst" });
-                  localStorage.setItem("status", "first");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  navigateBack();
                 }}
                 className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer "
               >

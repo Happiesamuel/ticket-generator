@@ -28,10 +28,11 @@
 }
 .background-ticket {
   background: radial-gradient(
-    ellipse 160% 80% at top left,
-    #24a0b5 -380%,
-    #02191d 100%
-  );
+      103.64% 57.39% at 14.02% 32.06%,
+      rgba(36, 160, 181, 0.2) 0%,
+      rgba(36, 160, 181, 0) 100%
+    ),
+    rgba(10, 12, 17, 0.1);
 }
 
 .roboto {

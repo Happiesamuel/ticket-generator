@@ -9,11 +9,13 @@ interface SelectTicket {
   id?: number;
   ticketNum?: number;
   stats?: string | null;
+  load?: boolean;
 }
 interface State {
   status: string;
   numTicket: number;
   ticketType: number | null;
+  loading: boolean;
 }
 interface Value extends State {
   dispatch: Dispatch<{
@@ -22,7 +24,12 @@ interface Value extends State {
   }>;
 }
 
-const initialState: State = { status: "first", numTicket: 1, ticketType: null };
+const initialState: State = {
+  status: "first",
+  numTicket: 1,
+  ticketType: null,
+  loading: false,
+};
 const TicketContext = createContext<Value>({
   ...initialState,
   dispatch: () => {},
@@ -47,6 +54,11 @@ function reducer(
         ...state,
         status: "third",
       };
+    case "showLoader":
+      return {
+        ...state,
+        loading: action.payload?.load as boolean,
+      };
     case "backToFirst":
       return {
         ...state,
@@ -67,12 +79,14 @@ function reducer(
   }
 }
 export default function TicketProvider({ children }: { children: ReactNode }) {
-  const [{ status, numTicket, ticketType }, dispatch] = useReducer(
+  const [{ status, numTicket, ticketType, loading }, dispatch] = useReducer(
     reducer,
     initialState
   );
   return (
-    <TicketContext.Provider value={{ status, dispatch, numTicket, ticketType }}>
+    <TicketContext.Provider
+      value={{ status, dispatch, numTicket, ticketType, loading }}
+    >
       {children}
     </TicketContext.Provider>
   );
