@@ -104,28 +104,29 @@ export default function SecondScreen() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 1500);
   }
+  console.log(uploading);
   return (
     <>
       <TicketHeader headerObj={{ title: "Attendee Details", step: 2 }} />
       <TicketCover>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="rounded-3xl text-[#FAFAFA] border border-[#07373F] bg-[#052228] space-y-8 p-6">
+            <div className="rounded-3xl text-[#FAFAFA] border border-[#07373F] bg-[#052228] space-y-8 p-6 pb-12">
               <FormField
                 control={form.control}
                 name="profilePhoto"
                 render={() => (
                   <FormItem>
                     <div className="flex flex-col gap-4">
-                      <FormLabel className="roboto font-normal text-base text-[#FAFAFA] tracking-wide ">
-                        Profile Photo
+                      <FormLabel className="roboto font-normal text-base text-[#FAFAFA] pb-4 tracking-wide ">
+                        Upload Profile Photo
                       </FormLabel>
-                      <div className="bg-[#02191d] h-[240px] flex flex-col items-center justify-center">
+                      <div className="bg-transparent md:bg-[#02191d]  h-[200px] relative flex flex-col items-center justify-center">
                         <FormControl>
                           {!selectedFile ? (
                             <div
                               {...getRootProps()}
-                              className="bg-[#0E464F] cursor-pointer w-full md:w-[250px] h-full  rounded-3xl  flex flex-col gap-4 justify-center items-center"
+                              className="bg-[#0E464F] border-4 border-[#24A0B5]/50 cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
                             >
                               <input {...getInputProps()} />
                               <img src="/cloud.svg" />
@@ -136,21 +137,21 @@ export default function SecondScreen() {
                               </p>
                             </div>
                           ) : uploading ? (
-                            <div className="relative overflow-hidden cursor-pointer w-full md:w-[250px] h-full flex flex-col gap-4 justify-center items-center">
+                            <div className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center">
                               <img
                                 src={avatarUrl}
                                 loading="lazy"
                                 alt="Preview"
                                 className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
                               />
-                              <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
+                              <div className="absolute inset-0 rounded-3xl flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
                                 <FadeLoader color="#197686" />
                               </div>
                             </div>
                           ) : (
                             <div
                               {...getRootProps()}
-                              className="relative overflow-hidden cursor-pointer w-full md:w-[250px] h-full flex flex-col gap-4 justify-center items-center"
+                              className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
                             >
                               <img
                                 src={avatarUrl}
@@ -158,7 +159,7 @@ export default function SecondScreen() {
                                 alt="Preview"
                                 className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
                               />
-                              <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center bg-[#000000]/30 opacity-0 hover:opacity-100 transition-opacity duration-500">
+                              <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center rounded-3xl bg-[#000000]/30 opacity-0 hover:opacity-100 transition-opacity duration-500">
                                 <input {...getInputProps()} />
                                 <img src="/cloud.svg" />
                                 <p className="roboto font-normal text-center tracking-wide">
@@ -235,7 +236,7 @@ export default function SecondScreen() {
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2">
                   <FormLabel className="roboto font-normal  text-[#FAFAFA] text-base tracking-wide">
-                    About the project
+                    Special request?
                   </FormLabel>
                   <FormControl>
                     <Textarea

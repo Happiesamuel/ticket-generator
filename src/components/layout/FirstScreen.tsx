@@ -85,24 +85,24 @@ export default function FirstScreen() {
             Select Ticket Type:
           </p>
 
-          <div className="bg-[#052228] border border-[#07373F] rounded-3xl p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-[#052228] border border-[#07373F] rounded-3xl p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
             {buttons.map((button) => (
               <div
                 key={button.id}
                 onClick={() => setId(button.id)}
-                className={`flex justify-between cursor-pointer items-center border border-[#07373F]  rounded-xl p-2  transition-all duration-500 ${
-                  button.id === id ? "bg-[#197686]" : "bg-transparent"
+                className={`flex flex-col gap-3 cursor-pointer hover:bg-[#2C545B] hover:border border-[#197686]  rounded-xl p-2  transition-all duration-400 ${
+                  button.id === id
+                    ? "border bg-[#12464E]"
+                    : "border-2 bg-transparent"
                 }`}
               >
-                <div className="space-y-1 roboto text-[#FAFAFA] tracking-wide">
-                  <h3 className="font-normal text-base">{button.title}</h3>
-                  <p className="text-sm font-normal tracking-wide">
-                    {button.slot} left!
-                  </p>
-                </div>
-                <p className="border  text-[#FAFAFA] border-[#2BA4B9] roboto text-xl  font-semibold bg-[#0E464F] w-[70px] h-[38px] flex items-center justify-end pr-2 gap-2.5 rounded-xl">
+                <h3 className="  text-[#FAFAFA]  roboto text-xl  font-semibold   ">
                   {button.price === 0 ? "Free" : button.price + "$"}
-                </p>
+                </h3>
+                <div className="space-y-0 font-normal text-[#FAFAFA] tracking-wide">
+                  <h3 className=" text-base">{button.title}</h3>
+                  <p className="!text-[#D9D9D9]">{button.slot}/52</p>
+                </div>
               </div>
             ))}
           </div>
@@ -136,7 +136,7 @@ export default function FirstScreen() {
           </Select>
         </div>
 
-        <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent md:border-[#0E464F] gap-4 md:gap-8">
+        <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent  gap-4 md:gap-8">
           <Button className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer ">
             Cancel
           </Button>
