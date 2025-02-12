@@ -6,6 +6,17 @@ import TicketHeader from "./TicketHeader";
 export default function ThirdScreen() {
   const { dispatch } = useTicket();
   const data = JSON.parse(localStorage.getItem("formData") || "");
+  function bookAnother() {
+    dispatch({ type: "showLoader", payload: { load: true } });
+
+    setTimeout(() => {
+      dispatch({ type: "showLoader", payload: { load: false } });
+      dispatch({
+        type: "bookAnother",
+      });
+      localStorage.setItem("status", "first");
+    }, 1500);
+  }
   return (
     <>
       <TicketHeader headerObj={{ title: "Ready", step: 3 }} />
@@ -20,12 +31,7 @@ export default function ThirdScreen() {
       <Ticket data={data} />
       <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent md:border-[#0E464F] gap-4 md:gap-8">
         <Button
-          onClick={() => {
-            dispatch({
-              type: "bookAnother",
-            });
-            localStorage.setItem("status", "first");
-          }}
+          onClick={() => bookAnother()}
           className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer "
         >
           Book Another Ticket

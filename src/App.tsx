@@ -34,7 +34,7 @@ export default function App() {
 
       <div className="w-full flex items-center justify-center ">
         {loading && (
-          <div className="h-screen top-0 fixed flex items-center justify-center z-50 overflow-auto background-ticket  backdrop-blur-[4px] w-full">
+          <div className="h-screen top-0 fixed flex items-center justify-center z-[999999] overflow-auto background-ticket  backdrop-blur-[4px] w-full">
             <FadeLoader color="#197686" />
           </div>
         )}
