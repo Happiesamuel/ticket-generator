@@ -25,14 +25,19 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Name must contain at least 2 characters" }),
   email: z.string().email({ message: "The email you entered is not valid!" }),
-  about: z.string().min(2, {
-    message: "Project details must contain at least 2 characters",
-  }),
+  about: z
+    .string()
+    .min(2, {
+      message: "Special request must contain at least 2 characters",
+    })
+    .max(101, {
+      message: "Special request be less than 101 characters",
+    }),
   profilePhoto: z.string().url("Invalid image URL"),
 });
 
 export default function SecondScreen() {
-  const { dispatch } = useTicket();
+  const { dispatch, ticketType, numTicket } = useTicket();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,10 +65,15 @@ export default function SecondScreen() {
     form.reset();
   };
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      ticketType: ticketType,
+      numTicket: numTicket,
+      ...values,
+    };
     dispatch({ type: "showLoader", payload: { load: true } });
     setTimeout(() => {
       dispatch({ type: "showLoader", payload: { load: false } });
-      localStorage.setItem("formData", JSON.stringify(values));
+      localStorage.setItem("formData", JSON.stringify(data));
       handleReset();
       dispatch({
         type: "ready",

@@ -1,11 +1,11 @@
 import { useTicket } from "../../context/TicketContext";
 import { Button } from "../ui/button";
+import Ticket from "./Ticket";
 import TicketHeader from "./TicketHeader";
 
 export default function ThirdScreen() {
   const { dispatch } = useTicket();
-  const a = JSON.parse(localStorage.getItem("formData") || "");
-  console.log(a);
+  const data = JSON.parse(localStorage.getItem("formData") || "");
   return (
     <>
       <TicketHeader headerObj={{ title: "Ready", step: 3 }} />
@@ -17,7 +17,7 @@ export default function ThirdScreen() {
           You can download or Check your email for a copy
         </p>
       </div>
-
+      <Ticket data={data} />
       <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent md:border-[#0E464F] gap-4 md:gap-8">
         <Button
           onClick={() => {
