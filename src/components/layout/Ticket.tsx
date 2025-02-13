@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FadeLoader } from "react-spinners";
+import { TicketSvg } from "./TicketSvg";
 
 interface FormData {
   data: {
@@ -15,15 +16,16 @@ export default function Ticket({ data }: FormData) {
   const [load, setLoad] = useState(true);
   setTimeout(() => {
     setLoad(false);
-  }, 1500);
+  }, 1000);
   return (
     <div className="flex items-center justify-center relative min-h-[620px]">
       {load ? (
         <FadeLoader color="#197686" />
       ) : (
-        <div className="relative ">
-          <img src="/tics.svg" />
-          <div className="absolute  flex flex-col items-center   border border-[#24A0B5] rounded-2xl  bg-[#031E21]/10 p-2 md:p-3  text-[#fffff] text-lg z-50  bottom-[22%] mx-auto my-0 h-[74%] flex-1 max-w-[90%]  left-[5%]">
+        <div className="relative">
+          <TicketSvg />
+
+          <div className="absolute w-[260px]  h-[446px]  -translate-x-1/2 left-1/2  -translate-y-[63%]  flex flex-col items-center   border border-[#24A0B5] rounded-2xl  bg-[#031E21]/10 p-2 md:p-3  text-[#fffff] text-lg z-50  ">
             <div className="flex flex-col items-center gap-3 h-full md:gap-5 ">
               <div className="flex-1 min-w-0 ">
                 <h1 className="road-rage  font-normal text-[34px] leading-[16px] pb-3 pt-2 text-[#FAFAFA]">
@@ -87,7 +89,7 @@ export default function Ticket({ data }: FormData) {
             </div>
           </div>
 
-          <div className="absolute gap-5 flex flex-col items-center  bg-[#031E21]/10 p-3.5 text-[#fffff]  z-50 bottom-[1%]  left-[6.5%]">
+          <div className="absolute w-[260px]   -translate-x-1/2 left-1/2  translate-y-[205%] gap-5 flex flex-col items-center  bg-[#031E21]/10 p-3.5 text-[#fffff]  z-50 ">
             <img src="/bar.svg" />
           </div>
         </div>
