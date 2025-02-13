@@ -15,7 +15,15 @@ export default function TicketHeader({ headerObj }: HeaderObj) {
           Step {headerObj.step}/3
         </p>
       </div>
-      <div className="line" />
+      <div
+        className={`line ${
+          headerObj.step === 1
+            ? "after:w-[33.33%]"
+            : headerObj.step === 2
+            ? "after:w-[66.66%]"
+            : "after:w-full"
+        }`}
+      />
     </div>
   );
 }

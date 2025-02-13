@@ -57,10 +57,10 @@
 .line::after {
   content: "";
   position: absolute;
-  width: 80%;
-  @media (width >= 48rem) {
+  /* width: 80%; */
+  /* @media (width >= 48rem) {
     width: 36%;
-  }
+  } */
   height: 2px;
   background: #24a0b5;
 }

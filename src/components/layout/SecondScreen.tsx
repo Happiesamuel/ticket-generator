@@ -199,7 +199,9 @@ export default function SecondScreen() {
                           </>
                         </FormControl>
                       </div>
-                      <FormMessage className="pt-2 text-base roboto" />
+                      {!avatarUrl && (
+                        <FormMessage className="pt-2 text-base roboto" />
+                      )}
                     </div>
                   </FormItem>
                 )}
