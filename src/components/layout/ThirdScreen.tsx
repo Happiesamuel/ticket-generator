@@ -1,5 +1,5 @@
 import { useTicket } from "../../context/TicketContext";
-import { Button } from "../ui/button";
+import Buttons from "./Buttons";
 import Ticket from "./Ticket";
 import TicketHeader from "./TicketHeader";
 
@@ -29,17 +29,14 @@ export default function ThirdScreen() {
         </p>
       </div>
       <Ticket data={data} />
-      <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent md:border-[#0E464F] gap-4 md:gap-8">
-        <Button
-          onClick={() => bookAnother()}
-          className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer "
-        >
-          Book Another Ticket
-        </Button>
-        <Button className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]">
-          Download Ticket
-        </Button>
-      </div>
+
+      <Buttons
+        first="Book Another Ticket"
+        second="Download Ticket"
+        type1="reset"
+        type2="submit"
+        click1={bookAnother}
+      />
     </>
   );
 }

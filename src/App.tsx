@@ -23,8 +23,20 @@ export default function App() {
     function () {
       const stat = localStorage.getItem("status")
         ? localStorage.getItem("status")
-        : "first";
+        : "ready";
       dispatch({ type: "statusSet", payload: { stats: stat } });
+    },
+    [dispatch]
+  );
+  useEffect(
+    function () {
+      const stat = localStorage.getItem("numkey")
+        ? JSON.parse(localStorage.getItem("numkey")!)
+        : { id: null, ticketNum: 1 };
+      dispatch({
+        type: "selectTicket2",
+        payload: { id: stat.id, ticketNum: stat.ticketNum },
+      });
     },
     [dispatch]
   );

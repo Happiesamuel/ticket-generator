@@ -9,9 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Button } from "../ui/button";
 import { useTicket } from "../../context/TicketContext";
 import { Toast } from "../../lib/utils";
+import Buttons from "./Buttons";
 export default function FirstScreen() {
   const { numTicket: ticNum, dispatch, ticketType } = useTicket();
   const [id, setId] = useState<number | null>(ticketType);
@@ -52,6 +52,10 @@ export default function FirstScreen() {
         payload: { id: id, ticketNum: numTicket },
       });
       localStorage.setItem("status", "second");
+      localStorage.setItem(
+        "numkey",
+        JSON.stringify({ id: id, ticketNum: numTicket })
+      );
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 1500);
   }
@@ -136,17 +140,7 @@ export default function FirstScreen() {
           </Select>
         </div>
 
-        <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent  gap-4 md:gap-8">
-          <Button className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer ">
-            Cancel
-          </Button>
-          <Button
-            onClick={() => handleSubmit()}
-            className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]"
-          >
-            Next
-          </Button>
-        </div>
+        <Buttons first="Cancel" second="Next" click2={handleSubmit} />
       </TicketCover>
     </>
   );

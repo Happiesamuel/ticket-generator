@@ -12,13 +12,13 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useTicket } from "../../context/TicketContext";
 import React, { useCallback, useEffect } from "react";
 import useUpload from "../../hooks/useUpload";
 import { FadeLoader } from "react-spinners";
+import Buttons from "./Buttons";
 
 const formSchema = z.object({
   name: z
@@ -114,7 +114,6 @@ export default function SecondScreen() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 1500);
   }
-  console.log(uploading);
   return (
     <>
       <TicketHeader headerObj={{ title: "Attendee Details", step: 2 }} />
@@ -133,43 +132,38 @@ export default function SecondScreen() {
                       </FormLabel>
                       <div className="bg-transparent md:bg-[#02191d]  h-[200px] relative flex flex-col items-center justify-center">
                         <FormControl>
-                          {!selectedFile ? (
-                            <div
-                              {...getRootProps()}
-                              className="bg-[#0E464F] border-4 border-[#24A0B5]/50 cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
-                            >
-                              <input {...getInputProps()} />
-                              <img src="/cloud.svg" />
-                              <p className="roboto font-normal text-center tracking-wide">
-                                {isDragActive
-                                  ? "Drop the files here..."
-                                  : "Drag & drop or click to upload"}
-                              </p>
-                            </div>
-                          ) : uploading ? (
-                            <div className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center">
-                              <img
-                                src={avatarUrl}
-                                loading="lazy"
-                                alt="Preview"
-                                className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
-                              />
-                              <div className="absolute inset-0 rounded-3xl flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
-                                <FadeLoader color="#197686" />
+                          <>
+                            {uploading && avatarUrl && (
+                              <div className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center">
+                                <img
+                                  src={avatarUrl}
+                                  loading="lazy"
+                                  alt="Preview"
+                                  className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
+                                />
+                                <div className="absolute z-50 inset-0 rounded-3xl flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
+                                  <FadeLoader color="#197686" />
+                                </div>
                               </div>
-                            </div>
-                          ) : (
-                            <div
-                              {...getRootProps()}
-                              className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
-                            >
-                              <img
-                                src={avatarUrl}
-                                loading="lazy"
-                                alt="Preview"
-                                className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
-                              />
-                              <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center rounded-3xl bg-[#000000]/30 opacity-0 hover:opacity-100 transition-opacity duration-500">
+                            )}
+                            {uploading && !selectedFile && !avatarUrl && (
+                              <div className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center">
+                                <img
+                                  src={avatarUrl}
+                                  loading="lazy"
+                                  alt="Preview"
+                                  className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
+                                />
+                                <div className="absolute z-50 inset-0 rounded-3xl flex flex-col items-center gap-4 justify-center bg-[#000000]/10 backdrop-blur-xs opacity-100 hover:opacity-100 transition-opacity duration-500">
+                                  <FadeLoader color="#197686" />
+                                </div>
+                              </div>
+                            )}
+                            {!selectedFile && (
+                              <div
+                                {...getRootProps()}
+                                className="bg-[#0E464F] border-4 border-[#24A0B5]/50 cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
+                              >
                                 <input {...getInputProps()} />
                                 <img src="/cloud.svg" />
                                 <p className="roboto font-normal text-center tracking-wide">
@@ -178,8 +172,31 @@ export default function SecondScreen() {
                                     : "Drag & drop or click to upload"}
                                 </p>
                               </div>
-                            </div>
-                          )}
+                            )}
+
+                            {!uploading && selectedFile && (
+                              <div
+                                {...getRootProps()}
+                                className=" cursor-pointer w-full md:w-[250px] h-[240px] absolute  rounded-3xl  flex flex-col gap-4 justify-center items-center"
+                              >
+                                <img
+                                  src={avatarUrl}
+                                  loading="lazy"
+                                  alt="Preview"
+                                  className="rounded-3xl object-cover object-center md:object-top w-[100%] h-[100%]"
+                                />
+                                <div className="absolute inset-0 flex flex-col items-center gap-4 justify-center rounded-3xl bg-[#000000]/30 opacity-0 hover:opacity-100 transition-opacity duration-500">
+                                  <input {...getInputProps()} />
+                                  <img src="/cloud.svg" />
+                                  <p className="roboto font-normal text-center tracking-wide">
+                                    {isDragActive
+                                      ? "Drop the files here..."
+                                      : "Drag & drop or click to upload"}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </>
                         </FormControl>
                       </div>
                       <FormMessage />
@@ -264,23 +281,13 @@ export default function SecondScreen() {
               )}
             />
 
-            <div className="jeju md:px-12 text-base tracking-wide flex md:flex-row flex-col-reverse items-center item rounded-3xl border border-transparent  gap-4 md:gap-8">
-              <Button
-                type="reset"
-                onClick={() => {
-                  navigateBack();
-                }}
-                className="w-full text-[#24A0B5] border border-[#24A0B5] bg-transparent hover:bg-transparent cursor-pointer "
-              >
-                Back
-              </Button>
-              <Button
-                type="submit"
-                className="w-full hover:bg-[#24A0B5] cursor-pointer bg-[#24A0B5]  text-[#FAFAFA]"
-              >
-                Get My Free Ticket
-              </Button>
-            </div>
+            <Buttons
+              first="Back"
+              second="Get My Free Ticket"
+              type1="reset"
+              type2="submit"
+              click1={navigateBack}
+            />
           </form>
         </Form>
       </TicketCover>

@@ -25,7 +25,7 @@ interface Value extends State {
 }
 
 const initialState: State = {
-  status: "first",
+  status: "ready",
   numTicket: 1,
   ticketType: null,
   loading: false,
@@ -48,6 +48,12 @@ function reducer(
         numTicket: action?.payload?.ticketNum as number,
         ticketType: action.payload?.id as number,
         status: "second",
+      };
+    case "selectTicket2":
+      return {
+        ...state,
+        numTicket: action?.payload?.ticketNum as number,
+        ticketType: action.payload?.id as number,
       };
     case "ready":
       return {
