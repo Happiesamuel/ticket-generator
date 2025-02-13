@@ -33,7 +33,7 @@ const formSchema = z.object({
     .max(101, {
       message: "Special request be less than 101 characters",
     }),
-  profilePhoto: z.string().url("Invalid image URL"),
+  profilePhoto: z.string().url("Profile photo is required"),
 });
 
 export default function SecondScreen() {
@@ -199,7 +199,7 @@ export default function SecondScreen() {
                           </>
                         </FormControl>
                       </div>
-                      <FormMessage />
+                      <FormMessage className="pt-2 text-base roboto" />
                     </div>
                   </FormItem>
                 )}
