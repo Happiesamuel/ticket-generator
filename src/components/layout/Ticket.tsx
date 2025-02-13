@@ -26,7 +26,7 @@ export default function Ticket({ data }: FormData) {
             </div>
             <img
               src={data.profilePhoto}
-              className="w-[135px] flex-1 h-[135px] mb-2 rounded-xl border-4 border-[#24A0B5]/50"
+              className="w-[135px] md:w-[140px] md:h-[140px]  object-cover object-top flex-1 h-[135px] mb-2 rounded-xl border-4 border-[#24A0B5]/50"
             />
             <div className="border mb-1 grid grid-cols-2 border-[#133D44] bg-[#08343C]   rounded-[8px] w-full p-1">
               <div className="p-1 gap-1 border-b border-r border-[#12464E] flex-1 flex flex-col items-start ">

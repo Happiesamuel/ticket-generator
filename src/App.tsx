@@ -40,6 +40,7 @@ export default function App() {
     },
     [dispatch]
   );
+
   return (
     <div className="w-full min-h-screen background flex flex-col items-center gap-12 md:gap-20">
       <Header />

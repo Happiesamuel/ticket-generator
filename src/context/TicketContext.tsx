@@ -25,7 +25,7 @@ interface Value extends State {
 }
 
 const initialState: State = {
-  status: "ready",
+  status: "first",
   numTicket: 1,
   ticketType: null,
   loading: false,
