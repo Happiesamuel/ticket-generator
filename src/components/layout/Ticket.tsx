@@ -11,7 +11,7 @@ interface FormData {
 export default function Ticket({ data }: FormData) {
   return (
     <div className="flex items-center justify-center relative">
-      <div className="relative">
+      <div className="relative ">
         <img src="/tics.svg" />
         <div className="absolute  flex flex-col items-center   border border-[#24A0B5] rounded-2xl  bg-[#031E21]/10 p-2 md:p-3  text-[#fffff] text-lg z-50  bottom-[22%] mx-auto my-0 h-[74%] flex-1 max-w-[90%]  left-[5%]">
           <div className="flex flex-col items-center gap-3 h-full md:gap-5 ">

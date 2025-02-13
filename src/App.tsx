@@ -23,7 +23,7 @@ export default function App() {
     function () {
       const stat = localStorage.getItem("status")
         ? localStorage.getItem("status")
-        : "ready";
+        : "first";
       dispatch({ type: "statusSet", payload: { stats: stat } });
     },
     [dispatch]
