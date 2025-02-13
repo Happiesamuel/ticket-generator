@@ -15,6 +15,7 @@ export default function ThirdScreen() {
         type: "bookAnother",
       });
       localStorage.setItem("status", "first");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 1500);
   }
   return (
