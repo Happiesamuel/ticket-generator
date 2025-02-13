@@ -16,7 +16,7 @@ export default function TicketHeader({ headerObj }: HeaderObj) {
         </p>
       </div>
       <div
-        className={`line ${
+        className={` line ${
           headerObj.step === 1
             ? "after:w-[33.33%]"
             : headerObj.step === 2
